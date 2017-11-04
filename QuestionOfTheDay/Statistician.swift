@@ -22,10 +22,7 @@ class Statistician {
     }
     
     init(){
-//        backendless.hostURL = SERVER_URL
-//        backendless.initApp(APPLICATION_ID, apiKey: API_KEY)
-//        dataStoreQuestionOfTheDay = backendless.data.of(QuestionOfTheDay.ofClass())
-//        dataStoreOpinion = backendless.data.of(Opinion.ofClass())
+
     }
 }
 
