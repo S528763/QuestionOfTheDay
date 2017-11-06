@@ -9,6 +9,15 @@ import UIKit
 
 class StatisticsViewController: UIViewController {
 
+    @IBOutlet weak var qotdStLBL: UILabel!
+    @IBOutlet weak var option0StLBL: UILabel!
+    @IBOutlet weak var option1StLBL: UILabel!
+    @IBOutlet weak var option2StLBL: UILabel!
+    
+    @IBOutlet weak var option0perLBL: UILabel!
+    @IBOutlet weak var option1perLBL: UILabel!
+    @IBOutlet weak var option2perLBL: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
