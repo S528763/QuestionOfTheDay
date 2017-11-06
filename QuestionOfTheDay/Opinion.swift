@@ -17,4 +17,8 @@ class Opinion : NSObject {
         self.question = question
         self.answer = answer
     }
+    
+//    override init() {
+//        super.init()
+//    }
 }

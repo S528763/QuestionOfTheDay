@@ -14,10 +14,10 @@ class QuestionOfTheDay : NSObject {
     var answer1:String?
     var answer2:String?
     var objectId:String?
-    var create:NSDate?
-    var update:NSDate?
+    var created:NSDate?
+    var updated:NSDate?
     
-    init(question:String?, answer0:String?, answer1:String?, answer2:String?) {
+    init(question:String, answer0:String, answer1:String, answer2:String) {
         self.question = question
         self.answer0 = answer0
         self.answer1 = answer1
@@ -25,6 +25,7 @@ class QuestionOfTheDay : NSObject {
     }
     
     override init() {
+        super.init()
         question = "Who is the president of the United States? blah blah blahhhhhhh"
         answer0 = "Hillary Clinton"
         answer1 = "Obama"
