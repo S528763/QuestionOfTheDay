@@ -9,12 +9,18 @@ import Foundation
 
 class Statistician {
     
+    var dataStoreQuestionOfTheDay:IDataStore!
+    var dataStoreOpinion:IDataStore!
+    
+    let vVC = VoteViewController()
+    
     func findPercentage() -> [Double] {
         return [0.0]
     }
     
-    func fetchQuestionOfTheDay() {
-        
+    func fetchQuestionOfTheDay() -> String {
+        print(QuestionOfTheDay().question!)
+        return QuestionOfTheDay().question!
     }
     
     func saveOpinion() {
@@ -22,7 +28,8 @@ class Statistician {
     }
     
     init(){
-
+        dataStoreQuestionOfTheDay = vVC.backendless.data.ofTable("QuestionOfTheDay")
+        dataStoreOpinion = vVC.backendless.data.ofTable("Opinion")
     }
 }
 

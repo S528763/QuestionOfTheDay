@@ -9,8 +9,8 @@ import Foundation
 
 @objcMembers
 class Opinion : NSObject {
-    var question:QuestionOfTheDay
-    var answer:Int
+    var question:QuestionOfTheDay?
+    var answer:Int?
     var objectId:String?
     
     init(question:QuestionOfTheDay, answer:Int) {
@@ -18,7 +18,7 @@ class Opinion : NSObject {
         self.answer = answer
     }
     
-//    override init() {
-//        super.init()
-//    }
+    override init() {
+        super.init()
+    }
 }

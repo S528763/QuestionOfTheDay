@@ -13,8 +13,7 @@ class VoteViewController: UIViewController {
     let API_KEY = "1E19DC14-C691-0C4B-FFF8-4898EB54BF00"
     let SERVER_URL = "https://api.backendless.com"
     let backendless = Backendless.sharedInstance()!
-    var dataStoreQuestionOfTheDay:IDataStore!
-    var dataStoreOpinion:IDataStore!
+    
     
     @IBOutlet weak var qotdLBL: UILabel!
     
@@ -23,6 +22,7 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var option2LBL: UILabel!
     
     @IBAction func option0BTN(_ sender: Any) {
+        qotdLBL.text = Statistician().fetchQuestionOfTheDay()
     }
     
     @IBAction func option1BTN(_ sender: Any) {
@@ -36,17 +36,18 @@ class VoteViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         backendless.hostURL = SERVER_URL
         backendless.initApp(APPLICATION_ID, apiKey: API_KEY)
-        dataStoreQuestionOfTheDay = backendless.data.of(QuestionOfTheDay.ofClass())
+
         //        dataStoreOpinion = backendless.data.ofTable("Opinion")
         
         // Saving test object in the test table
-        let testObject = ["foo" : "Hello"];
+        let testObject = ["question" : "Hello2"];
         //  let testo = "question"
         let dataStore = backendless.data.ofTable("TestTable")
         
-        qotdLBL.text = "\(findQotdAsync())"
-        //qotdLBL.text = QuestionOfTheDay.init().question
+       // qotdLBL.text = "\(findQotdAsync())"
+        qotdLBL.text = Statistician.init().dataStoreQuestionOfTheDay as? String
         
+       
         
         dataStore?.save(testObject,
                         response: {
@@ -65,17 +66,10 @@ class VoteViewController: UIViewController {
     }
     
     
-    func findQotdAsync() -> String {
-        
-        var qotda:String
-        
-        let queryBuilder = DataQueryBuilder()
-        
-        let qotd = self.dataStoreQuestionOfTheDay?.find(queryBuilder) as! String
-        qotda = qotd
-        
-        return qotd
-    }
+//    func findQotdAsync() -> String {
+//
+//
+//    }
     
     
 }
