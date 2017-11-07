@@ -7,12 +7,26 @@
 
 import Foundation
 
+
+
 class Statistician {
+    
+    let APPLICATION_ID = "32A3AC4A-394B-2170-FF91-2FDD735AE700"
+    let API_KEY = "1E19DC14-C691-0C4B-FFF8-4898EB54BF00"
+    let SERVER_URL = "https://api.backendless.com"
+    let backendless = Backendless.sharedInstance()!
+    
     
     var dataStoreQuestionOfTheDay:IDataStore!
     var dataStoreOpinion:IDataStore!
-    
-    let vVC = VoteViewController()
+        
+    init(){
+        backendless.hostURL = SERVER_URL
+        backendless.initApp(APPLICATION_ID, apiKey: API_KEY)
+        
+        dataStoreQuestionOfTheDay = backendless.data.of(QuestionOfTheDay.ofClass())
+        dataStoreOpinion = backendless.data.of(Opinion.ofClass())
+    }
     
     func findPercentage() -> [Double] {
         let queryBuilder = DataQueryBuilder()
@@ -24,8 +38,12 @@ class Statistician {
         return [ans0per,ans1per,ans2per]
     }
     
-    func fetchQuestionOfTheDay() -> String {
-        return dataStoreQuestionOfTheDay?.find() as! String
+    func fetchQuestionOfTheDay() -> QuestionOfTheDay {
+        dataStoreQuestionOfTheDay.find({results in print(results)}, error: {
+            (fault : Fault?) -> () in
+            print("Server reported an error: \(String(describing: fault))")
+            })
+        return (dataStoreQuestionOfTheDay?.find() as! [QuestionOfTheDay])[0]
     }
     
     func saveOpinion(_ ans:[String:Int]) {
@@ -41,10 +59,7 @@ class Statistician {
         })
     }
     
-    init(){
-        dataStoreQuestionOfTheDay = vVC.backendless.data.ofTable("QuestionOfTheDay")
-        dataStoreOpinion = vVC.backendless.data.ofTable("Opinion")
-    }
+   
 }
 
 

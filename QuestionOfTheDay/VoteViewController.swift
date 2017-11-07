@@ -8,12 +8,9 @@
 import UIKit
 
 class VoteViewController: UIViewController {
+    let statistician = Statistician()
     
-    let APPLICATION_ID = "32A3AC4A-394B-2170-FF91-2FDD735AE700"
-    let API_KEY = "1E19DC14-C691-0C4B-FFF8-4898EB54BF00"
-    let SERVER_URL = "https://api.backendless.com"
-    let backendless = Backendless.sharedInstance()!
-    
+   
     
     @IBOutlet weak var qotdLBL: UILabel!
     
@@ -23,44 +20,34 @@ class VoteViewController: UIViewController {
     
     @IBAction func option0BTN(_ sender: Any) {
       //  qotdLBL.text = Statistician().fetchQuestionOfTheDay()
-        Statistician().saveOpinion(["answer":0])
+        statistician.saveOpinion(["answer":0])
     }
     
     @IBAction func option1BTN(_ sender: Any) {
-        Statistician().saveOpinion(["answer":1])
+        statistician.saveOpinion(["answer":1])
     }
     
     @IBAction func option2BTN(_ sender: Any) {
-        Statistician().saveOpinion(["answer":2])
+        statistician.saveOpinion(["answer":2])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        backendless.hostURL = SERVER_URL
-        backendless.initApp(APPLICATION_ID, apiKey: API_KEY)
-        
-        //        dataStoreOpinion = backendless.data.ofTable("Opinion")
-        
-        // Saving test object in the test table
-        let testObject = ["question" : "Hello2"];
-     //   let testo = "question"
-        let dataStore = backendless.data.ofTable("TestTable")
-
-        
-       // qotdLBL.text = "\(findQotdAsync())"
-        //qotdLBL.text = Statistician.init().dataStoreQuestionOfTheDay as? String
-        
-        qotdLBL.text = QuestionOfTheDay().question
-        dataStore?.save(testObject,
-                        response: {
-                            (result) -> () in
-                            print("Object is saved in Backendless. Please check in the console.")
+        print("mayday")
+        let qotd = QuestionOfTheDay(question: "Who is the Prime minister of the Australia?", answer0: "Malcom Turnbull", answer1: "Derko Hyuvosky", answer2: "Garrell Maertfo")
+        statistician.dataStoreQuestionOfTheDay?.save(qotd,
+                                       response: {
+                                        (result) -> () in
+                                        print("Object is saved in Backendless. Please check in the console.")
         },
-                        error: {
-                            (fault : Fault?) -> () in
-                            print("Server reported an error: \(String(describing: fault))")
+                                       error: {
+                                        (fault : Fault?) -> () in
+                                        print("Server reported an error: \(String(describing: fault))")
         })
+        let results = statistician.fetchQuestionOfTheDay()
+        print(results)
+        //qotdLBL.text = statistician.dataStoreQuestionOfTheDay?.find() as! [QuestionOfTheDay]
     }
     
     override func didReceiveMemoryWarning() {
