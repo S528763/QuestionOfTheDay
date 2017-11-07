@@ -22,13 +22,16 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var option2LBL: UILabel!
     
     @IBAction func option0BTN(_ sender: Any) {
-        qotdLBL.text = Statistician().fetchQuestionOfTheDay()
+      //  qotdLBL.text = Statistician().fetchQuestionOfTheDay()
+        Statistician().saveOpinion(["answer":0])
     }
     
     @IBAction func option1BTN(_ sender: Any) {
+        Statistician().saveOpinion(["answer":1])
     }
     
     @IBAction func option2BTN(_ sender: Any) {
+        Statistician().saveOpinion(["answer":2])
     }
     
     override func viewDidLoad() {
@@ -36,19 +39,19 @@ class VoteViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         backendless.hostURL = SERVER_URL
         backendless.initApp(APPLICATION_ID, apiKey: API_KEY)
-
+        
         //        dataStoreOpinion = backendless.data.ofTable("Opinion")
         
         // Saving test object in the test table
         let testObject = ["question" : "Hello2"];
-        //  let testo = "question"
+     //   let testo = "question"
         let dataStore = backendless.data.ofTable("TestTable")
+
         
        // qotdLBL.text = "\(findQotdAsync())"
-        qotdLBL.text = Statistician.init().dataStoreQuestionOfTheDay as? String
+        //qotdLBL.text = Statistician.init().dataStoreQuestionOfTheDay as? String
         
-       
-        
+        qotdLBL.text = QuestionOfTheDay().question
         dataStore?.save(testObject,
                         response: {
                             (result) -> () in
@@ -66,7 +69,14 @@ class VoteViewController: UIViewController {
     }
     
     
-//    func findQotdAsync() -> String {
+//    func findQotdAsync() -> QuestionOfTheDay {
+//
+//        let queryBuilder = DataQueryBuilder()
+//        queryBuilder!.setWhereClause("question LIKE '%\("what")%'")
+//        let so = Statistician()
+//        let qotd = so.dataStoreQuestionOfTheDay.find(queryBuilder)
+//        return qotd
+//
 //
 //
 //    }

@@ -22,6 +22,11 @@ class StatisticsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        option0perLBL.text = String(format: "%.1f %%", Statistician().findPercentage()[0])
+        option1perLBL.text = String(format: "%.1f %%", Statistician().findPercentage()[1])
+        option2perLBL.text = String(format: "%.1f %%", Statistician().findPercentage()[2])
+        
     }
 
     override func didReceiveMemoryWarning() {
