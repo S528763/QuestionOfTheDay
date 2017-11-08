@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+let statistician = Statistician()
 
 class Statistician {
     
@@ -15,15 +15,12 @@ class Statistician {
     let API_KEY = "1E19DC14-C691-0C4B-FFF8-4898EB54BF00"
     let SERVER_URL = "https://api.backendless.com"
     let backendless = Backendless.sharedInstance()!
-    
-    
     var dataStoreQuestionOfTheDay:IDataStore!
     var dataStoreOpinion:IDataStore!
-        
+    
     init(){
         backendless.hostURL = SERVER_URL
         backendless.initApp(APPLICATION_ID, apiKey: API_KEY)
-        
         dataStoreQuestionOfTheDay = backendless.data.of(QuestionOfTheDay.ofClass())
         dataStoreOpinion = backendless.data.of(Opinion.ofClass())
     }
@@ -39,27 +36,23 @@ class Statistician {
     }
     
     func fetchQuestionOfTheDay() -> QuestionOfTheDay {
-        dataStoreQuestionOfTheDay.find({results in print(results)}, error: {
-            (fault : Fault?) -> () in
-            print("Server reported an error: \(String(describing: fault))")
-            })
-        return (dataStoreQuestionOfTheDay?.find() as! [QuestionOfTheDay])[0]
+        let qotdDetails = statistician.dataStoreQuestionOfTheDay.find(byId: "3409DDC8-E602-D346-FFA4-81C1D1DE6B00") as! QuestionOfTheDay
+        return qotdDetails
     }
     
-    func saveOpinion(_ ans:[String:Int]) {
-        
-        dataStoreOpinion?.save(ans,
-                        response: {
-                            (result) -> () in
-                            print("Object is saved in Backendless for \(ans). Please check in the console.")
+    func saveOpinion(_ opinion: Opinion) {
+        dataStoreOpinion?.save(opinion,
+                               response: {
+                                (result) -> () in
+                                print("Object is saved in Backendless for \(opinion). Please check in the console.")
         },
-                        error: {
-                            (fault : Fault?) -> () in
-                            print("Server reported an error: \(String(describing: fault))")
+                               error: {
+                                (fault : Fault?) -> () in
+                                print("Server reported an error: \(String(describing: fault))")
         })
     }
     
-   
+    
 }
 
 

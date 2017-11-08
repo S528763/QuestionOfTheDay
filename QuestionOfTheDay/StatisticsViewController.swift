@@ -22,11 +22,28 @@ class StatisticsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        qotdStLBL?.text = statistician.fetchQuestionOfTheDay().question
+        option0StLBL?.text = statistician.fetchQuestionOfTheDay().answer0
+        option1StLBL?.text = statistician.fetchQuestionOfTheDay().answer1
+        option2StLBL?.text = statistician.fetchQuestionOfTheDay().answer2
+            
+            
+        option0perLBL.text = String(format: "%.1f %%", statistician.findPercentage()[0])
+        option1perLBL.text = String(format: "%.1f %%", statistician.findPercentage()[1])
+        option2perLBL.text = String(format: "%.1f %%", statistician.findPercentage()[2])
         
-        option0perLBL.text = String(format: "%.1f %%", Statistician().findPercentage()[0])
-        option1perLBL.text = String(format: "%.1f %%", Statistician().findPercentage()[1])
-        option2perLBL.text = String(format: "%.1f %%", Statistician().findPercentage()[2])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        qotdStLBL?.text = statistician.fetchQuestionOfTheDay().question
+        option0StLBL?.text = statistician.fetchQuestionOfTheDay().answer0
+        option1StLBL?.text = statistician.fetchQuestionOfTheDay().answer1
+        option2StLBL?.text = statistician.fetchQuestionOfTheDay().answer2
         
+        
+        option0perLBL.text = String(format: "%.1f %%", statistician.findPercentage()[0])
+        option1perLBL.text = String(format: "%.1f %%", statistician.findPercentage()[1])
+        option2perLBL.text = String(format: "%.1f %%", statistician.findPercentage()[2])
     }
 
     override func didReceiveMemoryWarning() {

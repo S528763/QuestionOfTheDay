@@ -13,12 +13,12 @@ class Opinion : NSObject {
     var answer:Int?
     var objectId:String?
     
-    init(question:QuestionOfTheDay, answer:Int) {
-        self.question = question
+    init(answer:Int) {
         self.answer = answer
     }
     
     override init() {
         super.init()
+        answer = 0
     }
 }

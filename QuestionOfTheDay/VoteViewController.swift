@@ -8,9 +8,8 @@
 import UIKit
 
 class VoteViewController: UIViewController {
-    let statistician = Statistician()
     
-   
+    var qotd:QuestionOfTheDay!
     
     @IBOutlet weak var qotdLBL: UILabel!
     
@@ -19,35 +18,32 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var option2LBL: UILabel!
     
     @IBAction func option0BTN(_ sender: Any) {
-      //  qotdLBL.text = Statistician().fetchQuestionOfTheDay()
-        statistician.saveOpinion(["answer":0])
+        statistician.saveOpinion(Opinion(answer: 0))
     }
     
     @IBAction func option1BTN(_ sender: Any) {
-        statistician.saveOpinion(["answer":1])
+        statistician.saveOpinion(Opinion(answer: 1))
     }
     
     @IBAction func option2BTN(_ sender: Any) {
-        statistician.saveOpinion(["answer":2])
+        statistician.saveOpinion(Opinion(answer: 2))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print("mayday")
-        let qotd = QuestionOfTheDay(question: "Who is the Prime minister of the Australia?", answer0: "Malcom Turnbull", answer1: "Derko Hyuvosky", answer2: "Garrell Maertfo")
-        statistician.dataStoreQuestionOfTheDay?.save(qotd,
-                                       response: {
-                                        (result) -> () in
-                                        print("Object is saved in Backendless. Please check in the console.")
-        },
-                                       error: {
-                                        (fault : Fault?) -> () in
-                                        print("Server reported an error: \(String(describing: fault))")
-        })
-        let results = statistician.fetchQuestionOfTheDay()
-        print(results)
-        //qotdLBL.text = statistician.dataStoreQuestionOfTheDay?.find() as! [QuestionOfTheDay]
+
+//        let giveQotd = QuestionOfTheDay(question: "Who is the Prime minister of the Australia?", answer0: "Malcom Turnbull", answer1: "Tony Abbott", answer2: "Julia Gillard")
+//        statistician.dataStoreQuestionOfTheDay?.save(giveQotd)
+
+        qotdLBL?.text = statistician.fetchQuestionOfTheDay().question
+        option0LBL?.text = statistician.fetchQuestionOfTheDay().answer0
+        option1LBL?.text = statistician.fetchQuestionOfTheDay().answer1
+        option2LBL?.text = statistician.fetchQuestionOfTheDay().answer2
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        qotd = statistician.fetchQuestionOfTheDay()
     }
     
     override func didReceiveMemoryWarning() {

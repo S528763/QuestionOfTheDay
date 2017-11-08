@@ -24,11 +24,7 @@ class QuestionOfTheDay : NSObject {
         self.answer2 = answer2
     }
     
-    override init() {
-        super.init()
-        question = "Who is the president of the United States?"
-        answer0 = "Hillary Clinton"
-        answer1 = "Obama"
-        answer2 = "Donald Trump"
+    convenience override init() {
+        self.init(question: "Who is the president of the United States?", answer0: "Hillary Clinton", answer1: "Barack Obama", answer2: "Donald Trump")
     }
 }
