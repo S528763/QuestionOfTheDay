@@ -41,15 +41,7 @@ class Statistician {
     }
     
     func saveOpinion(_ opinion: Opinion) {
-        dataStoreOpinion?.save(opinion,
-                               response: {
-                                (result) -> () in
-                                print("Object is saved in Backendless for \(opinion). Please check in the console.")
-        },
-                               error: {
-                                (fault : Fault?) -> () in
-                                print("Server reported an error: \(String(describing: fault))")
-        })
+        dataStoreOpinion?.save(opinion) as! Opinion
     }
     
     

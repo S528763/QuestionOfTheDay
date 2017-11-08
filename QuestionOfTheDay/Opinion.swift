@@ -9,8 +9,8 @@ import Foundation
 
 @objcMembers
 class Opinion : NSObject {
-    var question:QuestionOfTheDay?
-    var answer:Int?
+    //var question:QuestionOfTheDay?
+    var answer:Int = 0
     var objectId:String?
     
     init(answer:Int) {

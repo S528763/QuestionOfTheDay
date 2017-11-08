@@ -18,15 +18,18 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var option2LBL: UILabel!
     
     @IBAction func option0BTN(_ sender: Any) {
-        statistician.saveOpinion(Opinion(answer: 0))
+        let op0:Opinion = Opinion(answer: 0)
+        statistician.saveOpinion(op0)
     }
     
     @IBAction func option1BTN(_ sender: Any) {
-        statistician.saveOpinion(Opinion(answer: 1))
+        let op1:Opinion = Opinion(answer: 1)
+        statistician.saveOpinion(op1)
     }
     
     @IBAction func option2BTN(_ sender: Any) {
-        statistician.saveOpinion(Opinion(answer: 2))
+        let op2:Opinion = Opinion(answer: 2)
+        statistician.saveOpinion(op2)
     }
     
     override func viewDidLoad() {
